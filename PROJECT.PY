@@ -49,6 +49,7 @@ def takeCommand():
         return "None"
     return query
 
+
 def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
@@ -62,38 +63,11 @@ if __name__ == "__main__":
     while True:
     # if 1:
         query = takeCommand().lower()
-
-        # Logic for executing tasks based on query
-        if 'wikipedia' in query:
-            speak('Searching Wikipedia...')
-            query = query.replace("wikipedia", "")
-            results = wikipedia.summary(query, sentences=2)
-            speak("According to Wikipedia")
-            print(results)
-            speak(results)
-
-        elif 'open youtube' in query:
-            webbrowser.open("youtube.com")
-
-        elif 'open google' in query:
-            webbrowser.open("google.com")
-
-        elif 'open stackoverflow' in query:
-            webbrowser.open("stackoverflow.com")   
-
-        elif 'open Gmail' in query:
-            webbrowser.open("gmail.com")
-
-        elif 'open github' in query:
-            webbrowser.open("github.com")
-
-
-        elif 'play music' in query:
-            music_dir = 'D:\Music'
-            songs = os.listdir(music_dir)
-            print(songs)    
-            os.startfile(os.path.join(music_dir, songs[0]))
-
+        if 'web search' in query:
+            speak('Searching Web...')
+            query = takeCommand().lower()
+            webbrowser.open(query)
+            
         elif 'the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")    
             speak(f"Sir, the time is {strTime}")
@@ -108,4 +82,7 @@ if __name__ == "__main__":
                 speak("Email was sent")
             except Exception as e:
                 print(e)
-                speak("sorry for the in convience")    
+                speak("sorry for the inconvience") 
+        
+        elif 'thank you' in query:
+            break
